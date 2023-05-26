@@ -31,7 +31,6 @@ def find_directories(target, wordlist_file):
         # Run gobuster with dir mode, -u for url, -w for wordlist
         subprocess.run(['gobuster', 'dir', '-u', target, '-w', wordlist_file], text=True)
     except Exception as e:
-        # If an error occurs (e.g. gobuster is not installed), print the error message
         print(f"An error occurred during gobuster execution: {e}")
 
 
@@ -46,7 +45,7 @@ parser.add_argument("-w", "--wordlist-file", type=argparse.FileType('r'), requir
 args = parser.parse_args()
 
 if args.all_ports:
-    args.ports = range(1, 1000)
+    args.ports = range(1, 65536)
 
 open_ports = []
 try:
@@ -60,7 +59,7 @@ try:
     for port in open_ports:
         service_enum(args.target, port)
 
-    find_directories(args.target, args.wordlist_file.name)
+    brute_force_directories(args.target, args.wordlist_file.name)
 
 except KeyboardInterrupt:
     print("\nExiting...")
