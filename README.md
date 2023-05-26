@@ -23,4 +23,4 @@ The command-line arguments are:
 Here is an example of how to run the script:
 
 ```bash
-python script.py -t <target_IP> -p 22 80 443 -w <path_to_wordlist>
+python gbscan.py -t <target_IP> -p 22 80 443 -w <path_to_wordlist>
