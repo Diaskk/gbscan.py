@@ -59,7 +59,7 @@ try:
     for port in open_ports:
         service_enum(args.target, port)
 
-    brute_force_directories(args.target, args.wordlist_file.name)
+    find_directories(args.target, args.wordlist_file.name)
 
 except KeyboardInterrupt:
     print("\nExiting...")
