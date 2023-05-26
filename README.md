@@ -18,6 +18,7 @@ The command-line arguments are:
 
 - `-t`, `--target`: Target IP address. (required)
 - `-p`, `--ports`: Ports to scan. Default are ports 22, 80, and 443. (optional)
+- `-a`, `--all-ports`: Scan all ports. (optional)
 - `-w`, `--wordlist-file`: File path to the wordlist for gobuster. (required)
 
 Here is an example of how to run the script:
