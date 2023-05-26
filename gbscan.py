@@ -20,13 +20,12 @@ def service_enum(target, port):
         print("Enumerating port {}:".format(port))
         # Run nmap with the -sV option for version detection and -p to specify the port
         result = subprocess.check_output(['nmap', '-sV', '-p', str(port), target])
-        print(result.decode('utf-8'))  # Decoding byte string into text and printing it
+        print(result.decode('utf-8'))
     except Exception as e:
-        # If an error occurs (e.g. nmap is not installed), print the error message
         print(f"An error occurred during service enumeration: {e}")
 
-# Function to brute force directories using gobuster
-def brute_force_directories(target, wordlist_file):
+# Function to find directories using gobuster
+def find_directories(target, wordlist_file):
     try:
         print("Running gobuster on target {}".format(target))
         # Run gobuster with dir mode, -u for url, -w for wordlist
@@ -37,7 +36,6 @@ def brute_force_directories(target, wordlist_file):
 
 
 # Create a new argument parser
-# Create a new argument parser
 parser = argparse.ArgumentParser(description="A simple pentest script.")
 parser.add_argument("-t", "--target", required=True, help="Target IP address.")
 parser.add_argument("-p", "--ports", nargs="+", default=[22, 80, 443], type=int, help="Ports to scan.")
@@ -47,7 +45,6 @@ parser.add_argument("-w", "--wordlist-file", type=argparse.FileType('r'), requir
 # Parse command-line arguments
 args = parser.parse_args()
 
-# If --all-ports is set, ignore the --ports argument and scan all ports
 if args.all_ports:
     args.ports = range(1, 1000)
 
@@ -63,7 +60,7 @@ try:
     for port in open_ports:
         service_enum(args.target, port)
 
-    brute_force_directories(args.target, args.wordlist_file.name)
+    find_directories(args.target, args.wordlist_file.name)
 
 except KeyboardInterrupt:
     print("\nExiting...")
